@@ -1,0 +1,22 @@
+{
+  "name": "Development container",
+  "context": "..",
+  "dockerFile": "./Dockerfile",
+  "runArgs": ["--init"],
+  "initializeCommand": "if [ \"${CODESPACES}\" != \"true\" ]; then umask 077 && mkdir -p ~/.ssh && umask 177 && touch ~/.git-credentials ~/.zsh_history; fi",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/zsh"
+  },
+  "extensions": [
+    "jeff-hykin.better-cpp-syntax",
+    "ms-vscode.cpptools",
+    "visualstudioexptteam.vscodeintellicode-insiders",
+    "xaver.clang-format"
+  ],
+  "remoteUser": "vscode",
+  "mounts": [
+    "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind",
+    "source=${localEnv:HOME}/.git-credentials,target=/home/vscode/.git-credentials,type=bind",
+    "source=${localEnv:HOME}/.zsh_history,target=/home/vscode/.zsh_history,type=bind"
+  ]
+}
